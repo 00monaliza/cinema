@@ -311,7 +311,7 @@
             </div>
 
             <div style="text-align: center; margin-top: 50px;">
-                <a href="https://wa.me/77055580008" target="_blank" class="btn btn-primary"><span data-translate="bookNow">Записаться сейчас</span></a>
+                <a href="#" class="btn btn-primary" id="bookingBtn"><span data-translate="bookNow">Записаться сейчас</span></a>
             </div>
         </div>
     </section>
@@ -347,6 +347,22 @@
 
     <!-- Scroll to Top Button -->
     <div class="scroll-top" id="scrollTop">↑</div>
+
+    <!-- Appointment Type Selection Modal -->
+    <div class="modal" id="appointmentModal">
+        <div class="modal-content" style="max-width: 500px;">
+            <span class="modal-close" id="appointmentModalClose">&times;</span>
+            <h2 style="text-align: center; margin-bottom: 30px; color: var(--primary);" data-translate="selectType">Выберите тип приема:</h2>
+            <div class="appointment-type-buttons">
+                <button type="button" class="appointment-type-btn" data-type="online">
+                    <span data-translate="btnOnline">Онлайн прием</span>
+                </button>
+                <button type="button" class="appointment-type-btn" data-type="offline">
+                    <span data-translate="btnOffline">Оффлайн прием</span>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <script src="js/script.js"></script>
 </body>

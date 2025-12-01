@@ -438,10 +438,62 @@ scrollTop.addEventListener('click', () => {
     });
 });
 
-// ==================== BOOKING LINKS (removed modal, direct WhatsApp) ====================
-// All booking functionality now uses direct WhatsApp links
-// Online: https://wa.me/77055580008
-// Offline: https://wa.me/77077339686
+// ==================== APPOINTMENT TYPE SELECTION MODAL ====================
+const appointmentModal = document.getElementById('appointmentModal');
+const appointmentModalClose = document.getElementById('appointmentModalClose');
+const bookingBtn = document.getElementById('bookingBtn');
+
+// Open modal when clicking "Записаться сейчас"
+if (bookingBtn) {
+    bookingBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        appointmentModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+}
+
+// Close modal
+function closeAppointmentModal() {
+    appointmentModal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+if (appointmentModalClose) {
+    appointmentModalClose.addEventListener('click', closeAppointmentModal);
+}
+
+// Close modal when clicking outside
+if (appointmentModal) {
+    appointmentModal.addEventListener('click', (e) => {
+        if (e.target === appointmentModal) {
+            closeAppointmentModal();
+        }
+    });
+}
+
+// Close modal with Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && appointmentModal && appointmentModal.classList.contains('active')) {
+        closeAppointmentModal();
+    }
+});
+
+// Handle appointment type selection - redirect to WhatsApp
+document.addEventListener('click', (e) => {
+    if (e.target.closest('.appointment-type-btn')) {
+        const btn = e.target.closest('.appointment-type-btn');
+        const type = btn.getAttribute('data-type');
+        
+        // Choose WhatsApp number based on type
+        const whatsappNumber = type === 'online' ? '77055580008' : '77077339686';
+        
+        // Open WhatsApp in new tab
+        window.open(`https://wa.me/${whatsappNumber}`, '_blank');
+        
+        // Close modal
+        closeAppointmentModal();
+    }
+});
 
 // ==================== CURSOR TRAIL (Optional) ====================
 if (window.innerWidth > 768) {
