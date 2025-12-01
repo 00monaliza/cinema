@@ -226,6 +226,37 @@ nav {
     align-items: center;
 }
 
+/* Language Switcher */
+.language-switcher {
+    display: flex;
+    gap: 5px;
+    padding: 5px;
+    background: var(--secondary);
+    border-radius: 8px;
+}
+
+.lang-btn {
+    padding: 8px 15px;
+    border: none;
+    background: transparent;
+    color: var(--text);
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.lang-btn:hover {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.lang-btn.active {
+    background: var(--primary);
+    color: var(--white);
+}
+
 .nav-link {
     text-decoration: none;
     color: var(--text);
