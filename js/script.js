@@ -528,34 +528,42 @@ if (reviewsSlider) {
     const scrollAmount = 430; // width of review-item (400px) + gap (30px)
 
     // Navigation buttons with instant auto-scroll resume
+    const handlePrevClick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        reviewsSlider.classList.add('paused');
+        currentScroll -= scrollAmount;
+        reviewsSlider.style.transform = `translateX(-${currentScroll}px)`;
+        
+        // Resume auto-scroll instantly after click
+        setTimeout(() => {
+            reviewsSlider.classList.remove('paused');
+            reviewsSlider.style.transform = '';
+        }, 100);
+    };
+
+    const handleNextClick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        reviewsSlider.classList.add('paused');
+        currentScroll += scrollAmount;
+        reviewsSlider.style.transform = `translateX(-${currentScroll}px)`;
+        
+        // Resume auto-scroll instantly after click
+        setTimeout(() => {
+            reviewsSlider.classList.remove('paused');
+            reviewsSlider.style.transform = '';
+        }, 100);
+    };
+
     if (reviewPrev) {
-        reviewPrev.addEventListener('click', (e) => {
-            e.stopPropagation();
-            reviewsSlider.classList.add('paused');
-            currentScroll -= scrollAmount;
-            reviewsSlider.style.transform = `translateX(-${currentScroll}px)`;
-            
-            // Resume auto-scroll instantly after click
-            setTimeout(() => {
-                reviewsSlider.classList.remove('paused');
-                reviewsSlider.style.transform = '';
-            }, 100);
-        });
+        reviewPrev.addEventListener('click', handlePrevClick);
+        reviewPrev.addEventListener('touchend', handlePrevClick);
     }
 
     if (reviewNext) {
-        reviewNext.addEventListener('click', (e) => {
-            e.stopPropagation();
-            reviewsSlider.classList.add('paused');
-            currentScroll += scrollAmount;
-            reviewsSlider.style.transform = `translateX(-${currentScroll}px)`;
-            
-            // Resume auto-scroll instantly after click
-            setTimeout(() => {
-                reviewsSlider.classList.remove('paused');
-                reviewsSlider.style.transform = '';
-            }, 100);
-        });
+        reviewNext.addEventListener('click', handleNextClick);
+        reviewNext.addEventListener('touchend', handleNextClick);
     }
 
     // Pause animation on hover (desktop only)
