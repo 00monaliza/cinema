@@ -186,6 +186,15 @@ header.scrolled {
     color: var(--primary);
     position: relative;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
 }
 
 .logo::after {
