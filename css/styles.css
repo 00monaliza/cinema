@@ -1002,6 +1002,7 @@ footer {
 footer p {
     margin-bottom: 15px;
     font-size: 0.95rem;
+    justify-content: center;
 }
 
 .footer-contacts {
