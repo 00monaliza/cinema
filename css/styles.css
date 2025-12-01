@@ -318,79 +318,7 @@ nav {
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-/* Mobile Menu */
-.mobile-menu-btn {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    z-index: 1001;
-}
-
-.mobile-menu-btn span {
-    width: 25px;
-    height: 3px;
-    background: var(--primary);
-    transition: all 0.3s ease;
-    border-radius: 3px;
-}
-
-.mobile-menu-btn.active span:nth-child(1) {
-    transform: rotate(45deg) translate(8px, 8px);
-}
-
-.mobile-menu-btn.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.mobile-menu-btn.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
-}
-
-.mobile-nav {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100vh;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(20px);
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    transition: left 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    z-index: 999;
-}
-
-[data-theme="dark"] .mobile-nav {
-    background: rgba(42, 42, 42, 0.98);
-}
-
-.mobile-nav.active {
-    left: 0;
-}
-
-.mobile-nav .nav-link {
-    font-size: 1.5rem;
-    animation: fadeInUp 0.6s ease backwards;
-}
-
-.mobile-nav .nav-link:nth-child(1) { animation-delay: 0.1s; }
-.mobile-nav .nav-link:nth-child(2) { animation-delay: 0.2s; }
-.mobile-nav .nav-link:nth-child(3) { animation-delay: 0.3s; }
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+/* Mobile menu removed - desktop nav shown on all devices */
 
 /* Hero Section */
 .hero {
@@ -1128,17 +1056,36 @@ footer {
     .hero-content h1 { font-size: 1.8rem; }
     .hero-subtitle { font-size: 0.9rem; }
     
-    .logo {
+    header {
+        padding: 10px 15px;
+    }
+    
+    nav {
+        gap: 5px;
+    }
+    
+    .nav-link {
+        font-size: 0.75rem;
+        padding: 6px 8px;
+    }
+    
+    .theme-toggle {
+        width: 30px;
+        height: 30px;
         font-size: 0.9rem;
     }
     
+    .logo {
+        font-size: 0.8rem;
+    }
+    
     .logo-img {
-        height: 35px;
+        height: 30px;
     }
     
     .logo-circle-img {
-        height: 30px;
-        width: 30px;
+        height: 25px;
+        width: 25px;
     }
     
     .stat-number {
@@ -1175,8 +1122,8 @@ footer {
     }
     
     .lang-btn {
-        padding: 6px 12px;
-        font-size: 0.85rem;
+        padding: 5px 8px;
+        font-size: 0.7rem;
     }
     
     .location-info h3 {
@@ -1195,10 +1142,6 @@ footer {
         min-height: 100vh;
         padding: 120px 20px 60px;
     }
-    
-    .mobile-nav {
-        padding-top: 80px;
-    }
 }
 
 /* Print Styles */
@@ -1206,8 +1149,6 @@ footer {
     .loader,
     .particles,
     header,
-    .mobile-menu-btn,
-    .mobile-nav,
     .theme-toggle,
     .scroll-top,
     .modal,
@@ -1586,16 +1527,42 @@ footer {
     .hero-content h1 { font-size: 2.2rem; }
     .hero-subtitle { font-size: 1rem; padding: 0 20px; }
     .about-grid { grid-template-columns: 1fr; gap: 30px; }
-    nav { display: none; }
-    .mobile-menu-btn { display: flex; }
-    .mobile-nav { display: flex; }
     
     header {
         padding: 15px 20px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    nav {
+        width: 100%;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    
+    .nav-link {
+        font-size: 0.85rem;
+        padding: 8px 12px;
+    }
+    
+    .language-switcher {
+        gap: 5px;
+    }
+    
+    .lang-btn {
+        padding: 6px 10px;
+        font-size: 0.75rem;
+    }
+    
+    .theme-toggle {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
     }
     
     .logo {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
     
     .logo-img {
@@ -1626,16 +1593,6 @@ footer {
         right: 20px;
         width: 45px;
         height: 45px;
-    }
-
-    .theme-toggle {
-        width: 45px;
-        height: 45px;
-        font-size: 1.1rem;
-    }
-    
-    #mobileThemeToggle {
-        margin-left: 0;
     }
 
     .review-item {

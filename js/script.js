@@ -1,6 +1,5 @@
 // ==================== THEME TOGGLE ====================
 const themeToggle = document.getElementById('themeToggle');
-const mobileThemeToggle = document.getElementById('mobileThemeToggle');
 const htmlElement = document.documentElement;
 
 // Load saved theme or default to light
@@ -18,12 +17,10 @@ function toggleTheme() {
 }
 
 themeToggle.addEventListener('click', toggleTheme);
-mobileThemeToggle.addEventListener('click', toggleTheme);
 
 function updateThemeIcon(theme) {
     const icon = theme === 'light' ? '🌙' : '☀️';
     themeToggle.textContent = icon;
-    mobileThemeToggle.textContent = icon;
 }
 
 // ==================== LANGUAGE SWITCHER ====================
@@ -308,40 +305,6 @@ window.addEventListener('scroll', () => {
         header.classList.add('scrolled');
     } else {
         header.classList.remove('scrolled');
-    }
-});
-
-// ==================== MOBILE MENU ====================
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const mobileNav = document.getElementById('mobileNav');
-
-mobileMenuBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    mobileMenuBtn.classList.toggle('active');
-    mobileNav.classList.toggle('active');
-});
-
-// Close mobile menu when clicking on links
-document.querySelectorAll('.mobile-nav .nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-        mobileMenuBtn.classList.remove('active');
-        mobileNav.classList.remove('active');
-    });
-});
-
-// Close mobile menu when clicking outside
-document.addEventListener('click', (e) => {
-    if (!mobileNav.contains(e.target) && !mobileMenuBtn.contains(e.target) && mobileNav.classList.contains('active')) {
-        mobileMenuBtn.classList.remove('active');
-        mobileNav.classList.remove('active');
-    }
-});
-
-// Close mobile menu on window resize
-window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) {
-        mobileMenuBtn.classList.remove('active');
-        mobileNav.classList.remove('active');
     }
 });
 
