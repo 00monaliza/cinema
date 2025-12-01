@@ -32,10 +32,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
 }
 
 body {
@@ -45,6 +48,8 @@ body {
     background-color: var(--secondary);
     overflow-x: hidden;
     transition: background-color 0.3s ease, color 0.3s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Cursor Trail Effect */
@@ -1077,6 +1082,7 @@ footer {
 .location-info {
     text-align: center;
     max-width: 600px;
+    width: 100%;
 }
 
 .location-info h3 {
@@ -1091,9 +1097,120 @@ footer {
     margin-bottom: 20px;
 }
 
+.location-info .btn {
+    width: auto;
+    min-width: 200px;
+}
+
 @media (max-width: 768px) {
     .location-content iframe {
         height: 300px;
+    }
+}
+
+/* Tablet Adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .hero-content h1 { font-size: 2.8rem; }
+    .about-grid { gap: 40px; }
+    .stats { grid-template-columns: repeat(3, 1fr); }
+    .timeline-grid { grid-template-columns: 1fr; gap: 30px; }
+    .services-grid { grid-template-columns: 1fr; gap: 30px; }
+    .pricing-grid { grid-template-columns: 1fr; gap: 30px; }
+    
+    .review-item {
+        width: 350px;
+        height: 450px;
+    }
+}
+
+/* Small Mobile Adjustments */
+@media (max-width: 480px) {
+    .hero-content h1 { font-size: 1.8rem; }
+    .hero-subtitle { font-size: 0.9rem; }
+    
+    .logo {
+        font-size: 0.9rem;
+    }
+    
+    .logo-img {
+        height: 35px;
+    }
+    
+    .logo-circle-img {
+        height: 30px;
+        width: 30px;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .review-item {
+        width: 250px;
+        height: 350px;
+    }
+    
+    .card {
+        padding: 20px;
+    }
+    
+    .service-card {
+        padding: 20px;
+    }
+    
+    .btn {
+        padding: 14px 25px;
+        font-size: 0.9rem;
+    }
+    
+    .language-switcher {
+        gap: 3px;
+        padding: 3px;
+    }
+    
+    .lang-btn {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .location-info h3 {
+        font-size: 1.2rem;
+    }
+    
+    .location-info p {
+        font-size: 1rem;
+    }
+}
+
+/* Landscape Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero {
+        height: auto;
+        min-height: 100vh;
+        padding: 120px 20px 60px;
+    }
+    
+    .mobile-nav {
+        padding-top: 80px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .loader,
+    .particles,
+    header,
+    .mobile-menu-btn,
+    .mobile-nav,
+    .theme-toggle,
+    .scroll-top,
+    .modal,
+    .review-modal {
+        display: none !important;
+    }
+    
+    section {
+        page-break-inside: avoid;
     }
 }
 
@@ -1305,6 +1422,8 @@ footer {
     overflow: hidden;
     padding: 40px 0;
     cursor: pointer;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
 }
 
 .reviews-slider {
@@ -1415,6 +1534,7 @@ footer {
 /* Mobile Adjustments */
 @media (max-width: 768px) {
     .hero-content h1 { font-size: 2.2rem; }
+    .hero-subtitle { font-size: 1rem; padding: 0 20px; }
     .about-grid { grid-template-columns: 1fr; gap: 30px; }
     nav { display: none; }
     .mobile-menu-btn { display: flex; }
@@ -1422,6 +1542,19 @@ footer {
     
     header {
         padding: 15px 20px;
+    }
+    
+    .logo {
+        font-size: 1rem;
+    }
+    
+    .logo-img {
+        height: 40px;
+    }
+    
+    .logo-circle-img {
+        height: 35px;
+        width: 35px;
     }
 
     section {
@@ -1450,18 +1583,36 @@ footer {
         height: 45px;
         font-size: 1.1rem;
     }
+    
+    #mobileThemeToggle {
+        margin-left: 0;
+    }
 
     .review-item {
-        width: 300px;
-        height: 400px;
+        width: 280px;
+        height: 380px;
     }
 
     .reviews-slider {
-        gap: 20px;
+        gap: 15px;
+        animation: scroll-reviews-mobile 25s linear infinite;
+    }
+    
+    @keyframes scroll-reviews-mobile {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
     }
 
     .pricing-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .pricing-card {
+        padding: 25px;
     }
 
     .appointment-type-buttons {
@@ -1470,5 +1621,34 @@ footer {
 
     .appointment-type-btn {
         min-width: 100%;
+    }
+    
+    .modal-content {
+        padding: 30px 20px;
+        width: 95%;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+        padding: 0 20px;
+    }
+    
+    .hero-buttons .btn {
+        width: 100%;
+    }
+    
+    .language-switcher {
+        flex-direction: row;
+    }
+    
+    .doctor-photo img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    .location-content {
+        gap: 20px;
     }
 }

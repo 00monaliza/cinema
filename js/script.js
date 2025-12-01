@@ -1,5 +1,6 @@
 // ==================== THEME TOGGLE ====================
 const themeToggle = document.getElementById('themeToggle');
+const mobileThemeToggle = document.getElementById('mobileThemeToggle');
 const htmlElement = document.documentElement;
 
 // Load saved theme or default to light
@@ -7,17 +8,22 @@ const savedTheme = localStorage.getItem('theme') || 'light';
 htmlElement.setAttribute('data-theme', savedTheme);
 updateThemeIcon(savedTheme);
 
-themeToggle.addEventListener('click', () => {
+function toggleTheme() {
     const currentTheme = htmlElement.getAttribute('data-theme');
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
     
     htmlElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
     updateThemeIcon(newTheme);
-});
+}
+
+themeToggle.addEventListener('click', toggleTheme);
+mobileThemeToggle.addEventListener('click', toggleTheme);
 
 function updateThemeIcon(theme) {
-    themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
+    const icon = theme === 'light' ? '🌙' : '☀️';
+    themeToggle.textContent = icon;
+    mobileThemeToggle.textContent = icon;
 }
 
 // ==================== LANGUAGE SWITCHER ====================
@@ -322,6 +328,22 @@ document.querySelectorAll('.mobile-nav .nav-link').forEach(link => {
     });
 });
 
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!mobileNav.contains(e.target) && !mobileMenuBtn.contains(e.target) && mobileNav.classList.contains('active')) {
+        mobileMenuBtn.classList.remove('active');
+        mobileNav.classList.remove('active');
+    }
+});
+
+// Close mobile menu on window resize
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+        mobileMenuBtn.classList.remove('active');
+        mobileNav.classList.remove('active');
+    }
+});
+
 // ==================== SMOOTH SCROLL ====================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -582,14 +604,37 @@ if (window.innerWidth > 768) {
 const reviewsSlider = document.getElementById('reviewsSlider');
 const reviewItems = document.querySelectorAll('.review-item');
 
-// Pause animation on hover
+// Pause animation on hover (desktop) and touch (mobile)
 if (reviewsSlider) {
+    // Desktop hover
     reviewsSlider.addEventListener('mouseenter', () => {
         reviewsSlider.classList.add('paused');
     });
 
     reviewsSlider.addEventListener('mouseleave', () => {
         reviewsSlider.classList.remove('paused');
+    });
+
+    // Mobile touch support
+    let touchStarted = false;
+    
+    reviewsSlider.addEventListener('touchstart', () => {
+        touchStarted = true;
+        reviewsSlider.classList.add('paused');
+    });
+
+    reviewsSlider.addEventListener('touchend', () => {
+        setTimeout(() => {
+            if (touchStarted) {
+                reviewsSlider.classList.remove('paused');
+                touchStarted = false;
+            }
+        }, 1000);
+    });
+
+    reviewsSlider.addEventListener('touchcancel', () => {
+        reviewsSlider.classList.remove('paused');
+        touchStarted = false;
     });
 
     // Create modal for viewing reviews
