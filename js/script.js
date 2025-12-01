@@ -604,38 +604,129 @@ if (window.innerWidth > 768) {
 // ==================== REVIEWS SLIDER ====================
 const reviewsSlider = document.getElementById('reviewsSlider');
 const reviewItems = document.querySelectorAll('.review-item');
+const reviewPrev = document.getElementById('reviewPrev');
+const reviewNext = document.getElementById('reviewNext');
 
-// Pause animation on hover (desktop) and touch (mobile)
 if (reviewsSlider) {
-    // Desktop hover
-    reviewsSlider.addEventListener('mouseenter', () => {
+    let currentScroll = 0;
+    let isManualControl = false;
+    let autoScrollTimeout;
+    const scrollAmount = 430; // width of review-item (400px) + gap (30px)
+
+    // Navigation buttons
+    if (reviewPrev) {
+        reviewPrev.addEventListener('click', (e) => {
+            e.stopPropagation();
+            enableManualControl();
+            currentScroll = Math.max(0, currentScroll - scrollAmount);
+            reviewsSlider.style.transform = `translateX(-${currentScroll}px)`;
+            resetAutoScroll();
+        });
+    }
+
+    if (reviewNext) {
+        reviewNext.addEventListener('click', (e) => {
+            e.stopPropagation();
+            enableManualControl();
+            const maxScroll = (reviewItems.length * scrollAmount) / 2;
+            currentScroll = Math.min(maxScroll - scrollAmount, currentScroll + scrollAmount);
+            reviewsSlider.style.transform = `translateX(-${currentScroll}px)`;
+            resetAutoScroll();
+        });
+    }
+
+    function enableManualControl() {
+        isManualControl = true;
+        reviewsSlider.classList.add('manual-control');
         reviewsSlider.classList.add('paused');
+    }
+
+    function disableManualControl() {
+        isManualControl = false;
+        reviewsSlider.classList.remove('manual-control');
+        reviewsSlider.classList.remove('paused');
+        reviewsSlider.style.transform = '';
+        currentScroll = 0;
+    }
+
+    function resetAutoScroll() {
+        clearTimeout(autoScrollTimeout);
+        autoScrollTimeout = setTimeout(() => {
+            disableManualControl();
+        }, 5000); // Resume auto-scroll after 5 seconds of inactivity
+    }
+
+    // Pause animation on hover (desktop)
+    reviewsSlider.addEventListener('mouseenter', () => {
+        if (!isManualControl) {
+            reviewsSlider.classList.add('paused');
+        }
     });
 
     reviewsSlider.addEventListener('mouseleave', () => {
-        reviewsSlider.classList.remove('paused');
+        if (!isManualControl) {
+            reviewsSlider.classList.remove('paused');
+        }
     });
 
-    // Mobile touch support
+    // Mouse drag support
+    let isDragging = false;
+    let startX = 0;
+    let scrollLeft = 0;
+
+    reviewsSlider.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.pageX;
+        scrollLeft = currentScroll;
+        enableManualControl();
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX;
+        const walk = (startX - x) * 2;
+        currentScroll = Math.max(0, scrollLeft + walk);
+        reviewsSlider.style.transform = `translateX(-${currentScroll}px)`;
+    });
+
+    document.addEventListener('mouseup', () => {
+        if (isDragging) {
+            isDragging = false;
+            resetAutoScroll();
+        }
+    });
+
+    // Mobile touch support with swipe
     let touchStarted = false;
+    let touchStartX = 0;
+    let touchScrollLeft = 0;
     
-    reviewsSlider.addEventListener('touchstart', () => {
+    reviewsSlider.addEventListener('touchstart', (e) => {
         touchStarted = true;
-        reviewsSlider.classList.add('paused');
+        touchStartX = e.touches[0].pageX;
+        touchScrollLeft = currentScroll;
+        enableManualControl();
+    });
+
+    reviewsSlider.addEventListener('touchmove', (e) => {
+        if (!touchStarted) return;
+        const x = e.touches[0].pageX;
+        const walk = (touchStartX - x) * 1.5;
+        currentScroll = Math.max(0, touchScrollLeft + walk);
+        reviewsSlider.style.transform = `translateX(-${currentScroll}px)`;
     });
 
     reviewsSlider.addEventListener('touchend', () => {
-        setTimeout(() => {
-            if (touchStarted) {
-                reviewsSlider.classList.remove('paused');
-                touchStarted = false;
-            }
-        }, 1000);
+        if (touchStarted) {
+            touchStarted = false;
+            resetAutoScroll();
+        }
     });
 
     reviewsSlider.addEventListener('touchcancel', () => {
-        reviewsSlider.classList.remove('paused');
         touchStarted = false;
+        resetAutoScroll();
     });
 
     // Create modal for viewing reviews
