@@ -35,6 +35,7 @@ const translations = {
         heroSubtitle: 'Эндокринолог и Диетолог для детей и взрослых.<br>Доказательная медицина и персонализированный подход.',
         btnOnline: 'Онлайн прием',
         btnOffline: 'Оффлайн прием',
+        bookAppointment: 'Записаться на прием',
         
         // About
         aboutTitle: 'Обо мне',
@@ -134,6 +135,7 @@ const translations = {
         heroSubtitle: 'Балалар мен ересектерге арналған Эндокринолог және Диетолог.<br>Дәлелді медицина және жекелендірілген тәсіл.',
         btnOnline: 'Онлайн қабылдау',
         btnOffline: 'Офлайн қабылдау',
+        bookAppointment: 'Қабылдауға жазылу',
         
         // About
         aboutTitle: 'Мен туралы',

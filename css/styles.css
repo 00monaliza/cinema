@@ -162,33 +162,38 @@ section {
 
 /* Header */
 header {
-    background: rgba(255, 255, 255, 0.95);
+    background: linear-gradient(135deg, rgba(99, 179, 237, 0.95) 0%, rgba(83, 150, 209, 0.95) 100%);
     backdrop-filter: blur(10px);
-    padding: 20px 40px;
+    padding: 15px 60px;
     position: fixed;
-    width: 100%;
-    top: 0;
+    width: calc(100% - 60px);
+    max-width: none;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 20px;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
     display: flex;
     justify-content: space-between;
     align-items: center;
     transition: all 0.3s ease;
+    border-radius: 50px;
 }
 
 [data-theme="dark"] header {
-    background: rgba(42, 42, 42, 0.95);
+    background: linear-gradient(135deg, rgba(42, 42, 42, 0.95) 0%, rgba(30, 30, 30, 0.95) 100%);
 }
 
 header.scrolled {
-    padding: 15px 40px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 12px 50px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    top: 10px;
 }
 
 .logo {
     font-weight: 700;
     font-size: 1.3rem;
-    color: var(--primary);
+    color: #ffffff;
     position: relative;
     overflow: hidden;
     display: flex;
@@ -227,7 +232,7 @@ header.scrolled {
 
 nav {
     display: flex;
-    gap: 10px;
+    gap: 25px;
     align-items: center;
 }
 
@@ -236,40 +241,40 @@ nav {
     display: flex;
     gap: 5px;
     padding: 5px;
-    background: var(--secondary);
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
 }
 
 .lang-btn {
     padding: 8px 15px;
     border: none;
     background: transparent;
-    color: var(--text);
+    color: #ffffff;
     font-weight: 600;
     cursor: pointer;
-    border-radius: 6px;
+    border-radius: 20px;
     transition: all 0.3s ease;
     font-size: 0.9rem;
 }
 
 .lang-btn:hover {
-    background: var(--primary);
-    color: var(--white);
+    background: rgba(255, 255, 255, 0.3);
+    color: #ffffff;
 }
 
 .lang-btn.active {
-    background: var(--primary);
-    color: var(--white);
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--primary);
 }
 
 .nav-link {
     text-decoration: none;
-    color: var(--text);
-    padding: 10px 20px;
-    font-weight: 600;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    color: #ffffff;
+    padding: 8px 18px;
+    font-weight: 500;
+    transition: all 0.3s ease;
     position: relative;
-    border-radius: 8px;
+    border-radius: 25px;
 }
 
 .nav-link::before {
@@ -279,16 +284,16 @@ nav {
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--primary);
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
     transform: scaleX(0);
-    transform-origin: right;
+    transform-origin: center;
     transition: transform 0.3s ease;
     z-index: -1;
 }
 
 .nav-link:hover {
-    color: var(--white);
+    color: #ffffff;
 }
 
 .nav-link:hover::before {
@@ -296,25 +301,46 @@ nav {
     transform-origin: left;
 }
 
+/* Book Appointment Button */
+.book-appointment-btn {
+    background: #ffffff;
+    color: var(--primary);
+    padding: 10px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid #ffffff;
+    white-space: nowrap;
+}
+
+.book-appointment-btn:hover {
+    background: transparent;
+    color: #ffffff;
+    transform: scale(1.05);
+}
+
 /* Theme Toggle */
 .theme-toggle {
-    background: var(--card-bg);
-    border: 2px solid var(--border-color);
-    width: 50px;
-    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     margin-left: 10px;
+    color: #ffffff;
 }
 
 .theme-toggle:hover {
     transform: rotate(180deg) scale(1.1);
-    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
@@ -328,7 +354,7 @@ nav {
     justify-content: center;
     text-align: center;
     background: var(--bg-hero);
-    padding-top: 80px;
+    padding-top: 120px;
     position: relative;
     overflow: hidden;
 }
